@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Album List{% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<form method = "post" style = "width:50%; margin:auto;">
+  {% csrf_token %}
+  {{form2 | crispy}}
+  <button class= "btn btn-primary">Add</button>
+</form>
+
+  {% comment %} {% if data2 %}
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Album Name</th>
+        <th scope="col">Musician Name</th>
+        <th scope="col">Release Date</th>
+        <th scope="col">Rating</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for albm in data2 %}
+        <tr>
+          <td>{{ albm.album_name }}</td>
+          <td>{{ albm.musician.first_name }} {{ albm.musician.last_name }}</td>
+          <td>{{ albm.release_date }}</td>
+          <td>{{ albm.rating }}</td>
+          <td><a class="btn btn-primary text-white">Edit</a> <a class="btn btn-danger text-white">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  {% else %}
+    <h3>There is no data available to show!!</h3>
+  {% endif %} {% endcomment %}
+
+{% endblock %}
